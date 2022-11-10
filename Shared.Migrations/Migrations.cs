@@ -1,5 +1,5 @@
 ﻿namespace Shared.Migrations;
 
-public class Class1
+public class Migrations
 {
 }

@@ -1,6 +1,6 @@
-﻿namespace Shared.Core.Models;
+﻿namespace Shared.Core.Entities;
 
-public class BaseEntity
+public class BaseEntity : IBaseEntity
 {
-    
+    public Guid Id { get; set; }
 }
