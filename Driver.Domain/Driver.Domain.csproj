@@ -7,8 +7,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Driver.Domain\Driver.Domain.csproj" />
-      <ProjectReference Include="..\Product.Domain\Product.Domain.csproj" />
       <ProjectReference Include="..\Shared.Core\Shared.Core.csproj" />
     </ItemGroup>
 

@@ -1,0 +1,13 @@
+﻿@model IEnumerable<Driver.Domain.Entities.DriverEntity>?
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<h2>title</h2>
+
+@foreach (var data in Model)
+{
+    <p> @data </p>
+}

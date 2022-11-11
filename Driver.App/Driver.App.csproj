@@ -7,9 +7,12 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="MediatR.Contracts" Version="1.0.1" />
+    </ItemGroup>
+
+    <ItemGroup>
       <ProjectReference Include="..\Driver.Domain\Driver.Domain.csproj" />
-      <ProjectReference Include="..\Product.Domain\Product.Domain.csproj" />
-      <ProjectReference Include="..\Shared.Core\Shared.Core.csproj" />
+      <ProjectReference Include="..\Shared.Migrations\Shared.Migrations.csproj" />
     </ItemGroup>
 
 </Project>
