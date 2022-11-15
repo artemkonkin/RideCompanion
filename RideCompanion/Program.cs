@@ -1,4 +1,3 @@
-using System.Reflection;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -18,9 +17,11 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
-builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
-
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());
+
+builder.Services.AddScoped<IApplicationDbContext, ApplicationDbContext>();
 
 var app = builder.Build();
 

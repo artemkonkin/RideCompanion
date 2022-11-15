@@ -8,7 +8,6 @@ namespace Shared.Migrations;
 public class ApplicationDbContext : IdentityDbContext, IApplicationDbContext
 {
     public DbSet<ProductEntity> Products { get; set; }
-
     public DbSet<DriverEntity> Drivers { get; set; }
     public DbSet<CarEntity> Cars { get; set; }
 

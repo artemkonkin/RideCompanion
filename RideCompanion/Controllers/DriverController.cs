@@ -6,14 +6,14 @@ namespace RideCompanion.Controllers;
 
 public class DriverController : Controller
 {
-    private IMediator _mediator;
+    private readonly IMediator _mediator;
 
     public DriverController(IMediator mediator)
     {
         _mediator = mediator;
     }
 
-    public async Task<IActionResult> Index(GetDriverByUserIdQuery query)
+    public async Task<IActionResult> Index(GetDriversQuery query)
     {
         var data = await _mediator.Send(query);
         return View(data);
