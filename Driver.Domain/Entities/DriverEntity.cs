@@ -2,17 +2,23 @@
 
 namespace Driver.Domain.Entities;
 
-public class DriverEntity : IBaseEntity, IAuditableEntity
+/// <summary>
+/// Водитель
+/// </summary>
+public class DriverEntity : BaseEntity
 {
-    public Guid Id { get; set; }
-    
+    /// <summary>
+    /// Пользователь
+    /// </summary>
     public string UserId { get; set; }
+    
+    /// <summary>
+    /// ФИО
+    /// </summary>
     public string FullName { get; set; }
+    
+    /// <summary>
+    /// Дата рождения
+    /// </summary>
     public DateTime BirthDate { get; set; }
-
-    public Guid CreatedBy { get; set; }
-    public DateTime CreateDate { get; set; }
-    public Guid UpdateBy { get; set; }
-    public DateTime UpdateDate { get; set; }
-    public bool IsDeleted { get; set; }
 }

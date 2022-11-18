@@ -8,10 +8,10 @@ public class GetCarsByDriverIdQuery : IRequest<IQueryable<CarEntity>>
 {
     public Guid DriverId { get; set; }
     
-    public class GetAllProductsQueryHandler : IRequestHandler<GetCarsByDriverIdQuery,IQueryable<CarEntity>>
+    public class GetCarsByDriverIdQueryHandler : IRequestHandler<GetCarsByDriverIdQuery,IQueryable<CarEntity>>
     {
         private readonly IApplicationDbContext _context;
-        public GetAllProductsQueryHandler(IApplicationDbContext context)
+        public GetCarsByDriverIdQueryHandler(IApplicationDbContext context)
         {
             _context = context;
         }

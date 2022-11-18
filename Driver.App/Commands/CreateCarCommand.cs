@@ -50,9 +50,9 @@ public class CreateCarCommand : IRequest<Guid>
                 Color = command.Color,
                 Model = command.Model,
 
-                CreatedBy = Guid.Parse(userId!),
+                CreatedById = Guid.Parse(userId!),
                 CreateDate = DateTime.Now,
-                UpdateBy = Guid.Parse(userId!),
+                UpdateById = Guid.Parse(userId!),
                 UpdateDate = DateTime.Now,
                 IsDeleted = false
             };

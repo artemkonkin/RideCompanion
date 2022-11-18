@@ -46,9 +46,9 @@ public class CreateDriverCommand : IRequest<Guid>
                 FullName = command.FullName,
                 BirthDate = command.BirthDate,
 
-                CreatedBy = Guid.Parse(userId!),
+                CreatedById = Guid.Parse(userId!),
                 CreateDate = DateTime.Now,
-                UpdateBy = Guid.Parse(userId!),
+                UpdateById = Guid.Parse(userId!),
                 UpdateDate = DateTime.Now,
                 IsDeleted = false
             };
