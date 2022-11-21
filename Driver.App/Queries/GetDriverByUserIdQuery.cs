@@ -8,11 +8,11 @@ public class GetDriverByUserIdQuery : IRequest<IQueryable<DriverEntity>>
 {
     public string UserId { get; set; }
 
-    public class GetAllProductsQueryHandler : IRequestHandler<GetDriverByUserIdQuery, IQueryable<DriverEntity>>
+    public class GetDriverByUserIdQueryHandler : IRequestHandler<GetDriverByUserIdQuery, IQueryable<DriverEntity>>
     {
         private readonly IApplicationDbContext _context;
 
-        public GetAllProductsQueryHandler(IApplicationDbContext context)
+        public GetDriverByUserIdQueryHandler(IApplicationDbContext context)
         {
             _context = context;
         }

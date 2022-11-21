@@ -6,11 +6,11 @@ namespace Driver.App.Queries;
 
 public class GetDriversQuery : IRequest<IQueryable<DriverEntity>>
 {
-    public class GetAllProductsQueryHandler : IRequestHandler<GetDriversQuery, IQueryable<DriverEntity>>
+    public class GetDriversQueryHandler : IRequestHandler<GetDriversQuery, IQueryable<DriverEntity>>
     {
         private readonly IApplicationDbContext _context;
 
-        public GetAllProductsQueryHandler(IApplicationDbContext context)
+        public GetDriversQueryHandler(IApplicationDbContext context)
         {
             _context = context;
         }

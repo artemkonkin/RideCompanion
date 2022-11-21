@@ -16,4 +16,9 @@ public class CompanionEntity : BaseEntity
     /// 
     /// </summary>
     public DateTime BirthDate { get; set; }
+    
+    /// <summary>
+    /// 
+    /// </summary>
+    public string PhoneNumber { get; set; }
 }

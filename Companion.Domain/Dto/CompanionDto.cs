@@ -1,15 +1,30 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿namespace Companion.Domain.Dto;
 
-namespace Shared.Core.Entities;
-
-public class BaseEntity : IBaseEntity, IAuditableEntity
+/// <summary>
+/// Попутчик
+/// </summary>
+public class CompanionDto
 {
     /// <summary>
     /// Id
     /// </summary>
-    [Key]
     public Guid Id { get; set; }
-
+    
+    /// <summary>
+    /// 
+    /// </summary>
+    public string Name { get; set; }
+    
+    /// <summary>
+    /// 
+    /// </summary>
+    public DateTime BirthDate { get; set; }
+    
+    /// <summary>
+    /// 
+    /// </summary>
+    public string PhoneNumber { get; set; }
+    
     /// <summary>
     /// Id создателя
     /// </summary>

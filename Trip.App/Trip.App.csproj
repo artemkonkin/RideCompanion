@@ -7,8 +7,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Commands" />
-      <Folder Include="Queries" />
+        <ProjectReference Include="..\Trip.Domain\Trip.Domain.csproj" />
+        <ProjectReference Include="..\Shared.Migrations\Shared.Migrations.csproj" />
     </ItemGroup>
 
 </Project>

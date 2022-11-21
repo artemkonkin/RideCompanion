@@ -6,10 +6,10 @@ namespace Driver.App.Queries;
 
 public class GetCarsQuery : IRequest<IQueryable<CarEntity>>
 {
-    public class GetAllProductsQueryHandler : IRequestHandler<GetCarsQuery,IQueryable<CarEntity>>
+    public class GetCarsQueryHandler : IRequestHandler<GetCarsQuery,IQueryable<CarEntity>>
     {
         private readonly IApplicationDbContext _context;
-        public GetAllProductsQueryHandler(IApplicationDbContext context)
+        public GetCarsQueryHandler(IApplicationDbContext context)
         {
             _context = context;
         }

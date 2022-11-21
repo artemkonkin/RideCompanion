@@ -9,7 +9,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Driver.App\Driver.App.csproj" />
-      <ProjectReference Include="..\Product.App\Product.App.csproj" />
       <ProjectReference Include="..\Shared.Core\Shared.Core.csproj" />
       <ProjectReference Include="..\Shared.Migrations\Shared.Migrations.csproj" />
     </ItemGroup>

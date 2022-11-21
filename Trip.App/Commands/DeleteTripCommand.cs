@@ -3,46 +3,46 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Shared.Migrations;
 
-namespace Driver.App.Commands;
+namespace Trip.App.Commands;
 
 /// <summary>
 /// Command
 /// </summary>
-public class DeleteCarCommand : IRequest<Guid>
+public class DeleteTripCommand : IRequest<Guid>
 {
     // ----------------------------
     // Props
     // ----------------------------
-    public Guid CarId { get; set; }
+    public Guid DriverId { get; set; }
     
     /// <summary>
     /// Handler
     /// </summary>
-    public class DeleteCarCommandHandler : IRequestHandler<DeleteCarCommand, Guid>
+    public class DeleteTripCommandHandler : IRequestHandler<DeleteTripCommand, Guid>
     {
         private readonly IApplicationDbContext _context;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly IHttpContextAccessor _httpContextAccessor;
         
-        public DeleteCarCommandHandler(IApplicationDbContext context, UserManager<IdentityUser> userManager, IHttpContextAccessor httpContextAccessor)
+        public DeleteTripCommandHandler(IApplicationDbContext context, UserManager<IdentityUser> userManager, IHttpContextAccessor httpContextAccessor)
         {
             _context = context;
             _userManager = userManager;
             _httpContextAccessor = httpContextAccessor;
         }
         
-        public async Task<Guid> Handle(DeleteCarCommand command, CancellationToken cancellationToken)
+        public async Task<Guid> Handle(DeleteTripCommand command, CancellationToken cancellationToken)
         {
-            var entity = _context.Cars.FirstOrDefault(e => e.Id == command.CarId);
+            var entity = _context.Trips.FirstOrDefault(e => e.Id == command.DriverId);
             
             if (entity != null)
             {
-                _context.Cars.Remove(entity);
+                _context.Trips.Remove(entity);
                 await _context.SaveChanges();
                 return entity.Id;
             }
 
-            return command.CarId;
+            return command.DriverId;
         }
     }
 }

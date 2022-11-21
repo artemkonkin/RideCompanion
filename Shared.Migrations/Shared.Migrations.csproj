@@ -8,8 +8,8 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Driver.Domain\Driver.Domain.csproj" />
-      <ProjectReference Include="..\Product.Domain\Product.Domain.csproj" />
       <ProjectReference Include="..\Shared.Core\Shared.Core.csproj" />
+      <ProjectReference Include="..\Trip.Domain\Trip.Domain.csproj" />
     </ItemGroup>
 
 </Project>

@@ -6,4 +6,10 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Companion.Domain\Companion.Domain.csproj" />
+      <ProjectReference Include="..\Driver.Domain\Driver.Domain.csproj" />
+      <ProjectReference Include="..\Shared.Core\Shared.Core.csproj" />
+    </ItemGroup>
+
 </Project>
