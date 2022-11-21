@@ -1,0 +1,28 @@
+﻿@model Driver.Domain.Dto.DriverDto
+
+<div class="offcanvas offcanvas-start" tabindex="-1" id="createDriver" aria-labelledby="createDriverLabel">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="createDriverLabel">Create driver</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <div>
+            Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.
+        </div>
+        <div>
+            <form method="post" asp-controller="Driver" asp-action="Create">
+                <div class="mb-3">
+                    <label asp-for="@Model.FullName" class="form-label">Full name</label>
+                    <input asp-for="@Model.FullName" type="text" class="form-control">
+                    <div class="form-text">Full name</div>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.BirthDate" class="form-label">Birth date</label>
+                    <input asp-for="@Model.BirthDate" type="date" class="form-control">
+                    <div class="form-text">Birth date</div>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>

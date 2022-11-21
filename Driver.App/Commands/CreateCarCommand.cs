@@ -12,9 +12,6 @@ namespace Driver.App.Commands;
 /// </summary>
 public class CreateCarCommand : IRequest<Guid>
 {
-    // ----------------------------
-    // Props
-    // ----------------------------
     public Guid DriverId { get; set; }
     public string Number { get; set; }
     public string Color { get; set; }

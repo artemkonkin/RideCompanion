@@ -1,8 +1,44 @@
-﻿@model IEnumerable<Driver.Domain.Entities.DriverEntity>
+﻿@model Driver.Domain.Dto.DriverDto
 
 @{
     ViewBag.Title = "title";
     Layout = "_Layout";
+    var viewData = (List<Driver.Domain.Entities.DriverEntity>)ViewData["data"]!;
+    var item = 0;
 }
 
 <h2>title</h2>
+
+<partial name="_CreateDriver" />
+<partial name="_UpdateDriver" />
+
+<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#createDriver" aria-controls="createDriver">
+    Create
+</button>
+
+@if (viewData != null)
+{
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">FullName</th>
+            <th scope="col">BirthDate</th>
+            <th scope="col">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var data in viewData)
+        {
+            <tr>
+                <th scope="row">@item++</th>
+                <td>@data.FullName</td>
+                <td>@data.BirthDate</td>
+                <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#updateDriver" aria-controls="updateDriver">
+                  Update
+                </button>
+            </tr>
+        }
+        </tbody>
+    </table>
+}

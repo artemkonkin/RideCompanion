@@ -12,9 +12,6 @@ namespace Driver.App.Commands;
 /// </summary>
 public class CreateDriverCommand : IRequest<Guid>
 {
-    // ----------------------------
-    // Props
-    // ----------------------------
     public string FullName { get; set; }
     public DateTime BirthDate { get; set; }
     

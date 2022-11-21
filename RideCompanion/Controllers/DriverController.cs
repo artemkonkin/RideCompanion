@@ -1,9 +1,14 @@
-﻿using Driver.App.Queries;
+﻿using Driver.App.Commands;
+using Driver.App.Queries;
+using Driver.Domain.Dto;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace RideCompanion.Controllers;
 
+/// <summary>
+/// 
+/// </summary>
 public class DriverController : Controller
 {
     private readonly IMediator _mediator;
@@ -13,24 +18,66 @@ public class DriverController : Controller
         _mediator = mediator;
     }
 
-    public async Task<IActionResult> Index(GetDriversQuery query)
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    public async Task<IActionResult> Index()
     {
-        var data = await _mediator.Send(query);
-        return View(data);
+        var data = await _mediator.Send(new GetDriversQuery());
+        
+        if (data.Any())
+        {
+            ViewData["data"] = data.ToList();
+        }
+        
+        return View(new DriverDto());
     }
-    
-    public IActionResult Create()
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="dto"></param>
+    /// <returns></returns>
+    public async Task<IActionResult> Create(DriverDto dto)
     {
-        return View();
+        var data = await _mediator.Send(new CreateDriverCommand
+        {
+            FullName = dto.FullName,
+            BirthDate = dto.BirthDate
+        });
+
+        return RedirectToAction("Index");
     }
-    
-    public IActionResult Update()
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="dto"></param>
+    /// <returns></returns>
+    public async Task<IActionResult> Update(DriverDto dto)
     {
-        return View();
+        var data = await _mediator.Send(new UpdateDriverCommand
+        {
+            CarId = dto.Id,
+            DriverDto = dto
+        });
+        
+        return RedirectToAction("Index");
     }
-    
-    public IActionResult Delete()
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    public async Task<IActionResult> Delete(Guid id)
     {
-        return View();
+        var data = await _mediator.Send(new DeleteDriverCommand
+        {
+            DriverId = id
+        });
+        
+        return RedirectToAction("Index");
     }
 }

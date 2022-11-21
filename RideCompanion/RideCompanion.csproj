@@ -8,9 +8,11 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Companion.App\Companion.App.csproj" />
       <ProjectReference Include="..\Driver.App\Driver.App.csproj" />
       <ProjectReference Include="..\Shared.Core\Shared.Core.csproj" />
       <ProjectReference Include="..\Shared.Migrations\Shared.Migrations.csproj" />
+      <ProjectReference Include="..\Trip.App\Trip.App.csproj" />
     </ItemGroup>
 
     <ItemGroup>

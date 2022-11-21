@@ -1,11 +1,9 @@
-﻿using Shared.Core.Entities;
-
-namespace Driver.Domain.Dto;
+﻿namespace Driver.Domain.Dto;
 
 /// <summary>
 /// Водитель
 /// </summary>
-public class DriverDto : IAuditableEntity
+public class DriverDto
 {
     public Guid Id { get; set; }
     

@@ -10,9 +10,6 @@ namespace Driver.App.Commands;
 /// </summary>
 public class DeleteCarCommand : IRequest<Guid>
 {
-    // ----------------------------
-    // Props
-    // ----------------------------
     public Guid CarId { get; set; }
     
     /// <summary>
