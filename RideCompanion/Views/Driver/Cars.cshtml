@@ -1,20 +1,18 @@
-﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
-@using Driver.Domain.Entities
-@model RideCompanion.ViewModels.DriverViewModel
+﻿@using Driver.Domain.Entities
+@model CarEntity
 
 @{
     ViewBag.Title = "title";
     Layout = "_Layout";
-    var viewData = (List<DriverEntity>)ViewData["data"]!;
+    var viewData = (List<CarEntity>)ViewData["data"]!;
     var i = 0;
 }
 
 <h2>title</h2>
-
 <partial name="_CreateDriver"/>
 <partial name="_UpdateDriver"/>
 
-<button class="btn btn-primary" type="button" onclick="CreateDriver()">
+<button class="btn btn-primary" type="button" onclick="CreateCar()">
     Create
 </button>
 
@@ -24,9 +22,10 @@
         <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">FullName</th>
-            <th scope="col">BirthDate</th>
-            <th scope="col">Actions</th>
+            <th scope="col">DriverId</th>
+            <th scope="col">Number</th>
+            <th scope="col">Color</th>
+            <th scope="col">Model</th>
         </tr>
         </thead>
         <tbody>
@@ -34,18 +33,16 @@
         {
             <tr class="align-middle">
                 <th scope="row">@(i++)</th>
-                <td>@item.FullName</td>
-                <td>@item.BirthDate</td>
+                <td>@item.DriverId</td>
+                <td>@item.Number</td>
+                <td>@item.Color</td>
+                <td>@item.Model</td>
                 <td>
-                    <a onclick="UpdateDriver('@item.Id')" type="button" class="btn btn-link">
+                    <a onclick="UpdateCar('@item.Id')" type="button" class="btn btn-link">
                         Update
                     </a>
                     <a asp-controller="Driver" asp-action="Delete" asp-route-id="@item.Id" type="button" class="btn btn-link">
                         Delete
-                    </a>
-                    |
-                    <a asp-controller="Driver" asp-action="Cars" asp-route-id="@item.Id" type="button" class="btn btn-link">
-                        Cars
                     </a>
                 </td>
             </tr>
@@ -56,13 +53,13 @@
 
 <script>
 
-    function CreateDriver() {
+    function CreateCar() {
       const form = document.getElementById('createDriver');
       const formObject = new bootstrap.Offcanvas(form);
       formObject.toggle();
     }
 	
-    function UpdateDriver(id) {
+    function UpdateCar(id) {
       const form = document.getElementById('updateDriver');
       const formObject = new bootstrap.Offcanvas(form);
 	  

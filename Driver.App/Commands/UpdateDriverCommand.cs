@@ -16,9 +16,9 @@ public class UpdateDriverCommand : IRequest<Guid>
     // ----------------------------
     // Props
     // ----------------------------
-    public Guid CarId { get; set; }
+    public Guid DriverId { get; set; }
     public DriverDto DriverDto { get; set; }
-    
+
     /// <summary>
     /// Handler
     /// </summary>
@@ -27,40 +27,36 @@ public class UpdateDriverCommand : IRequest<Guid>
         private readonly IApplicationDbContext _context;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        
+
         public UpdateDriverCommandHandler(IApplicationDbContext context, UserManager<IdentityUser> userManager, IHttpContextAccessor httpContextAccessor)
         {
             _context = context;
             _userManager = userManager;
             _httpContextAccessor = httpContextAccessor;
         }
-        
+
         public async Task<Guid> Handle(UpdateDriverCommand command, CancellationToken cancellationToken)
         {
-            var entity = _context.Drivers.FirstOrDefault(e => e.Id == command.CarId);
+            var entity = _context.Drivers.FirstOrDefault(d => d.Id == command.DriverDto.Id);
             var userId = _httpContextAccessor.HttpContext?.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            
+
             if (entity != null)
             {
-                var newEntity = new DriverEntity
-                {
-                    Id = entity.Id,
-                    UserId = command.DriverDto.UserId,
-                    FullName = command.DriverDto.FullName,
-                    BirthDate = command.DriverDto.BirthDate,
-                    CreatedById = entity.CreatedById,
-                    CreateDate = entity.CreateDate,
-                    UpdateById = Guid.Parse(userId!),
-                    UpdateDate = DateTime.Now,
-                    IsDeleted = command.DriverDto.IsDeleted
-                };
-                
-                _context.Drivers.Update(newEntity);
+                entity.Id = entity.Id;
+                entity.FullName = command.DriverDto.FullName;
+                entity.BirthDate = command.DriverDto.BirthDate;
+                entity.CreatedById = entity.CreatedById;
+                entity.CreateDate = entity.CreateDate;
+                entity.UpdateById = Guid.Parse(userId!);
+                entity.UpdateDate = DateTime.Now;
+                entity.IsDeleted = entity.IsDeleted;
+
+                _context.Drivers.Update(entity);
                 await _context.SaveChanges();
                 return entity.Id;
             }
 
-            return command.CarId;
+            return command.DriverId;
         }
     }
 }
