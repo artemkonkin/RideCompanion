@@ -59,9 +59,9 @@ public class DriverController : Controller
     /// </summary>
     /// <param name="viewModel"> Driver view model </param>
     /// <returns> Redirect to index page </returns>
-    public async Task<IActionResult> Create(DriverViewModel viewModel)
+    public async Task<IActionResult> CreateDriver(DriverViewModel viewModel)
     {
-        var data = await _mediator.Send(new CreateDriverCommand
+        await _mediator.Send(new CreateDriverCommand
         {
             FullName = viewModel.DriverDto.FullName,
             BirthDate = viewModel.DriverDto.BirthDate
@@ -75,9 +75,9 @@ public class DriverController : Controller
     /// </summary>
     /// <param name="viewModel"> Driver view model </param>
     /// <returns> Redirect to index page </returns>
-    public async Task<IActionResult> Update(DriverViewModel viewModel)
+    public async Task<IActionResult> UpdateDriver(DriverViewModel viewModel)
     {
-        var data = await _mediator.Send(new UpdateDriverCommand
+        await _mediator.Send(new UpdateDriverCommand
         {
             DriverId = viewModel.DriverDto.Id,
             DriverDto = viewModel.DriverDto
@@ -91,9 +91,9 @@ public class DriverController : Controller
     /// </summary>
     /// <param name="id"> Driver Id </param>
     /// <returns> Redirect to index page </returns>
-    public async Task<IActionResult> Delete(Guid id)
+    public async Task<IActionResult> DeleteDriver(Guid id)
     {
-        var data = await _mediator.Send(new DeleteDriverCommand
+        await _mediator.Send(new DeleteDriverCommand
         {
             DriverId = id
         });
@@ -101,11 +101,15 @@ public class DriverController : Controller
         return RedirectToAction("Index");
     }
     
+    // -------------------------------------------
+    // Car
+    // -------------------------------------------
+    
     /// <summary>
-    /// Driver cars
+    /// Cars
     /// </summary>
-    /// <param name="driverId"></param>
-    /// <returns></returns>
+    /// <param name="driverId"> Driver id </param>
+    /// <returns> View </returns>
     public async Task<IActionResult> Cars(Guid driverId)
     {
         var data = await _mediator.Send(new GetCarsByDriverIdQuery
@@ -119,5 +123,74 @@ public class DriverController : Controller
         }
         
         return View();
+    }
+    
+
+    /// <summary>
+    /// Get car by Id
+    /// </summary>
+    /// <param name="id"> Car Id </param>
+    /// <returns> Car entity </returns>
+    public async Task<IActionResult> GetCarById(Guid id)
+    {
+        var data = await _mediator.Send(new GetCarByIdQuery
+        {
+            Id = id
+        });
+        
+        if (data != null)
+        {
+            ViewData["car"] = data;
+        }
+
+        return Json(data);
+    }
+
+    /// <summary>
+    /// Create
+    /// </summary>
+    /// <param name="viewModel"> Driver view model </param>
+    /// <returns> Redirect to index page </returns>
+    public async Task<IActionResult> CreateCar(DriverViewModel viewModel)
+    {
+        await _mediator.Send(new CreateCarCommand
+        {
+            Number = viewModel.CarDto.Number,
+            Color = viewModel.CarDto.Color,
+            Model = viewModel.CarDto.Model
+        });
+
+        return RedirectToAction("Cars");
+    }
+
+    /// <summary>
+    /// Update
+    /// </summary>
+    /// <param name="viewModel"> Driver view model </param>
+    /// <returns> Redirect to index page </returns>
+    public async Task<IActionResult> UpdateCar(DriverViewModel viewModel)
+    {
+        await _mediator.Send(new UpdateCarCommand
+        {
+            CarId = viewModel.CarDto.Id,
+            CarDto = viewModel.CarDto
+        });
+        
+        return RedirectToAction("Cars");
+    }
+
+    /// <summary>
+    /// Delete
+    /// </summary>
+    /// <param name="id"> Car Id </param>
+    /// <returns> Redirect to index page </returns>
+    public async Task<IActionResult> DeleteCar(Guid id)
+    {
+        var data = await _mediator.Send(new DeleteCarCommand
+        {
+            CarId = id
+        });
+        
+        return RedirectToAction("Cars");
     }
 }

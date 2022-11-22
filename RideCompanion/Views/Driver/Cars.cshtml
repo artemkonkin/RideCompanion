@@ -9,8 +9,8 @@
 }
 
 <h2>title</h2>
-<partial name="_CreateDriver"/>
-<partial name="_UpdateDriver"/>
+<partial name="_CreateCar"/>
+<partial name="_UpdateCar"/>
 
 <button class="btn btn-primary" type="button" onclick="CreateCar()">
     Create
@@ -26,6 +26,7 @@
             <th scope="col">Number</th>
             <th scope="col">Color</th>
             <th scope="col">Model</th>
+            <th scope="col">Actions</th>
         </tr>
         </thead>
         <tbody>
@@ -41,7 +42,7 @@
                     <a onclick="UpdateCar('@item.Id')" type="button" class="btn btn-link">
                         Update
                     </a>
-                    <a asp-controller="Driver" asp-action="Delete" asp-route-id="@item.Id" type="button" class="btn btn-link">
+                    <a asp-controller="Driver" asp-action="DeleteDriver" asp-route-id="@item.Id" type="button" class="btn btn-link">
                         Delete
                     </a>
                 </td>
@@ -54,29 +55,28 @@
 <script>
 
     function CreateCar() {
-      const form = document.getElementById('createDriver');
+      const form = document.getElementById('createCar');
       const formObject = new bootstrap.Offcanvas(form);
       formObject.toggle();
     }
 	
     function UpdateCar(id) {
-      const form = document.getElementById('updateDriver');
+      const form = document.getElementById('updateCar');
       const formObject = new bootstrap.Offcanvas(form);
 	  
-	  fetch('/Driver/GetDriverById?Id=' + id)
+	  fetch('/Driver/GetCarById?Id=' + id)
         .then((response) => response.json())
         .then((response) => {
 			
-            const id = document.getElementById('DriverId');
-            const fullName = document.getElementById('DriverFullName');
-            const birthDate = document.getElementById('DriverBirthDate');
+            const id = document.getElementById('CarId');
+            const number = document.getElementById('CarNumber');
+            const color = document.getElementById('CarColor');
+            const model = document.getElementById('CarModel');
 			
 			id.value = response.id;
-			
-			fullName.value = response.fullName;
-			
-			var date = new Date(response.birthDate);
-			birthDate.value = date.toISOString().substring(0, 10);
+			number.value = response.number;
+			color.value = response.color;
+			model.value = response.model;
 			
 			formObject.toggle();
         });

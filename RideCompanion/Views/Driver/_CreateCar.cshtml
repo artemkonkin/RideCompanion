@@ -10,16 +10,21 @@
             Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.
         </div>
         <div>
-            <form method="post" asp-controller="Driver" asp-action="Create">
+            <form method="post" asp-controller="Driver" asp-action="CreateCar">
                 <div class="mb-3">
-                    <label asp-for="@Model.DriverDto.FullName" class="form-label">Full name</label>
-                    <input asp-for="@Model.DriverDto.FullName" type="text" class="form-control">
-                    <div class="form-text">Full name</div>
+                    <label asp-for="@Model.CarDto.Number" class="form-label">Number</label>
+                    <input asp-for="@Model.CarDto.Number" type="text" class="form-control">
+                    <div class="form-text">Number</div>
                 </div>
                 <div class="mb-3">
-                    <label asp-for="@Model.DriverDto.BirthDate" class="form-label">Birth date</label>
-                    <input asp-for="@Model.DriverDto.BirthDate" type="date" class="form-control">
-                    <div class="form-text">Birth date</div>
+                    <label asp-for="@Model.CarDto.Color" class="form-label">Color</label>
+                    <input asp-for="@Model.CarDto.Color" type="text" class="form-control">
+                    <div class="form-text">Color</div>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.CarDto.Model" class="form-label">Model</label>
+                    <input asp-for="@Model.CarDto.Model" type="text" class="form-control">
+                    <div class="form-text">Model</div>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>

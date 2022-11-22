@@ -13,9 +13,11 @@ namespace Trip.App.Commands;
 /// </summary>
 public class UpdateTripCommand : IRequest<Guid>
 {
-    // ----------------------------
-    // Props
-    // ----------------------------
+    public UpdateTripCommand(TripDto viewModelTripDto)
+    {
+        TripDto = viewModelTripDto;
+    }
+
     public TripDto TripDto { get; set; }
     
     /// <summary>

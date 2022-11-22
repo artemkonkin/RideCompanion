@@ -1,8 +1,9 @@
-﻿@model RideCompanion.ViewModels.DriverViewModel
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model RideCompanion.ViewModels.TripViewModel
 
 <div class="offcanvas offcanvas-start" tabindex="-1" id="createTrip" aria-labelledby="createTripLabel">
     <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="createTripLabel">Create driver</h5>
+        <h5 class="offcanvas-title" id="createTripLabel">Create trip</h5>
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
@@ -10,16 +11,28 @@
             Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.
         </div>
         <div>
-            <form method="post" asp-controller="Driver" asp-action="Create">
+            <form method="post" asp-controller="Trip" asp-action="CreateTrip">
                 <div class="mb-3">
-                    <label asp-for="@Model.DriverDto.FullName" class="form-label">Full name</label>
-                    <input asp-for="@Model.DriverDto.FullName" type="text" class="form-control">
-                    <div class="form-text">Full name</div>
+                    <label class="form-label">AddressFrom</label>
+                    <select asp-items="@ViewBag.cities" class="form-control" id="StudentGender" name="StudentGender">
+                        <option>Null</option> 
+                    </select>
+                    <div class="form-text">AddressFrom</div>
                 </div>
                 <div class="mb-3">
-                    <label asp-for="@Model.DriverDto.BirthDate" class="form-label">Birth date</label>
-                    <input asp-for="@Model.DriverDto.BirthDate" type="date" class="form-control">
-                    <div class="form-text">Birth date</div>
+                    <label class="form-label">AddressFrom</label>
+                    <input asp-for="@Model.TripDto.AddressFrom" type="text" class="form-control" id="TripAddressFrom">
+                    <div class="form-text">AddressFrom</div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">AddressTo</label>
+                    <input asp-for="@Model.TripDto.AddressTo" type="date" class="form-control" id="TripAddressTo">
+                    <div class="form-text">AddressTo</div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">DateTime</label>
+                    <input asp-for="@Model.TripDto.DateTime" type="date" class="form-control" id="TripDateTime" value="1900-01-01" min="1900-01-01" max="2100-12-31">
+                    <div class="form-text">DateTime</div>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>

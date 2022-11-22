@@ -8,4 +8,5 @@ namespace RideCompanion.ViewModels;
 public class DriverViewModel
 {
     public DriverDto DriverDto { get; set; }
+    public CarDto CarDto { get; set; }
 }

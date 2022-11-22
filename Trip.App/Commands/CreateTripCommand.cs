@@ -1,10 +1,9 @@
 ﻿using System.Security.Claims;
-using Companion.Domain.Entities;
-using Driver.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Shared.Migrations;
+using Trip.Domain.Dto;
 using Trip.Domain.Entities;
 
 namespace Trip.App.Commands;
@@ -14,16 +13,12 @@ namespace Trip.App.Commands;
 /// </summary>
 public class CreateTripCommand : IRequest<Guid>
 {
-    // ----------------------------
-    // Props
-    // ----------------------------
+    public CreateTripCommand(TripDto tripDto)
+    {
+        TripDto = tripDto;
+    }
 
-    public DriverEntity Driver { get; set; }
-    public CompanionEntity Companion { get; set; }
-    public CarEntity Car { get; set; }
-    public string AddressFrom { get; set; }
-    public string AddressTo { get; set; }
-    public DateTime DateTime { get; set; }
+    public TripDto TripDto { get; set; }
     
     /// <summary>
     /// Handler
@@ -49,12 +44,12 @@ public class CreateTripCommand : IRequest<Guid>
             {
                 Id = default,
                 
-                Driver = command.Driver,
-                Companion = command.Companion,
-                Car = command.Car,
-                AddressFrom = command.AddressFrom,
-                AddressTo = command.AddressTo,
-                DateTime = command.DateTime,
+                Driver = command.TripDto.Driver,
+                Companion = command.TripDto.Companion,
+                Car = command.TripDto.Car,
+                AddressFrom = command.TripDto.AddressFrom,
+                AddressTo = command.TripDto.AddressTo,
+                DateTime = command.TripDto.DateTime,
 
                 CreatedById = Guid.Parse(userId!),
                 CreateDate = DateTime.Now,

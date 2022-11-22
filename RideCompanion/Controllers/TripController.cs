@@ -1,5 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using RideCompanion.ViewModels;
+using Trip.App.Commands;
 using Trip.App.Queries;
 
 namespace RideCompanion.Controllers;
@@ -23,22 +25,52 @@ public class TripController : Controller
     /// <returns></returns>
     public async Task<IActionResult> Index(GetTripsQuery query)
     {
-        var data = await _mediator.Send(query);
-        return View(data);
-    }
-    
-    public IActionResult Create()
-    {
+        await _mediator.Send(query);
+        ViewBag.drivers = 0;
         return View();
     }
-    
-    public IActionResult Update()
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    public async Task<IActionResult> GetTripById(Guid id)
     {
-        return View();
+        var data = await _mediator.Send(new GetTripByIdQuery(id));
+        return Json(data);
     }
-    
-    public IActionResult Delete()
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="viewModel"></param>
+    /// <returns></returns>
+    public async Task<IActionResult> CreateTrip(TripViewModel viewModel)
     {
-        return View();
+        await _mediator.Send(new CreateTripCommand(viewModel.TripDto));
+        return RedirectToAction("Index");
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="viewModel"></param>
+    /// <returns></returns>
+    public async Task<IActionResult> UpdateTrip(TripViewModel viewModel)
+    {
+        await _mediator.Send(new UpdateTripCommand(viewModel.TripDto));
+        return RedirectToAction("Index");
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    public async Task<IActionResult> DeleteTrip(Guid id)
+    {
+        await _mediator.Send(new DeleteTripCommand(id));
+        return RedirectToAction("Index");
     }
 }

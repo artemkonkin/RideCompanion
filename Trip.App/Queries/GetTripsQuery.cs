@@ -1,5 +1,4 @@
-﻿using Driver.Domain.Entities;
-using MediatR;
+﻿using MediatR;
 using Shared.Migrations;
 using Trip.Domain.Entities;
 

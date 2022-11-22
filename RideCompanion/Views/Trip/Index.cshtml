@@ -1,8 +1,85 @@
-﻿@model IQueryable<Trip.Domain.Entities.TripEntity>
+﻿@using Trip.Domain.Entities
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model RideCompanion.ViewModels.TripViewModel
 
 @{
     ViewBag.Title = "title";
     Layout = "_Layout";
+    var viewData = (List<TripEntity>)ViewData["data"]!;
+    var i = 0;
 }
 
 <h2>title</h2>
+
+<partial name="_CreateTrip"/>
+<partial name="_UpdateTrip"/>
+
+<button class="btn btn-primary" type="button" onclick="CreateDriver()">
+    Create
+</button>
+
+@if (viewData != null)
+{
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">AddressFrom</th>
+            <th scope="col">AddressTo</th>
+            <th scope="col">DateTime</th>
+            <th scope="col">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in viewData)
+        {
+            <tr class="align-middle">
+                <th scope="row">@(i++)</th>
+                <td>@item.AddressFrom</td>
+                <td>@item.AddressTo</td>
+                <td>@item.DateTime</td>
+                <td>
+                    <a onclick="UpdateDriver('@item.Id')" type="button" class="btn btn-link">
+                        Update
+                    </a>
+                    <a asp-controller="Driver" asp-action="DeleteDriver" asp-route-id="@item.Id" type="button" class="btn btn-link">
+                        Delete
+                    </a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+
+<script>
+
+    function CreateDriver() {
+      const form = document.getElementById('createDriver');
+      const formObject = new bootstrap.Offcanvas(form);
+      formObject.toggle();
+    }
+	
+    function UpdateDriver(id) {
+      const form = document.getElementById('updateDriver');
+      const formObject = new bootstrap.Offcanvas(form);
+	  
+	  fetch('/Driver/GetTripById?Id=' + id)
+        .then((response) => response.json())
+        .then((response) => {
+			
+            const id = document.getElementById('TripId');
+            const addressFrom = document.getElementById('TripAddressFrom');
+            const addressTo = document.getElementById('TripAddressTo');
+            const dateTime = document.getElementById('TripDateTime');
+			
+			id.value = response.id;
+			addressFrom.value = response.addressFrom;
+			addressTo.value = response.addressTo;
+			dateTime.value = response.dateTime;
+			
+			formObject.toggle();
+        });
+    }
+	
+</script>

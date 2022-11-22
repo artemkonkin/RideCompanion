@@ -1,6 +1,5 @@
 ﻿using System.Security.Claims;
 using Driver.Domain.Dto;
-using Driver.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
