@@ -1,8 +1,85 @@
-﻿@model IQueryable<Trip.Domain.Entities.TripEntity>
+﻿@using Companion.Domain.Entities
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model RideCompanion.ViewModels.CompanionViewModel
 
 @{
     ViewBag.Title = "title";
     Layout = "_Layout";
+    var viewData = (List<CompanionEntity>)ViewData["data"]!;
+    var i = 0;
 }
 
 <h2>title</h2>
+
+<partial name="_CreateCompanion"/>
+<partial name="_UpdateCompanion"/>
+
+<button class="btn btn-primary" type="button" onclick="CreateCompanion()">
+    Create
+</button>
+
+@if (viewData != null)
+{
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">BirthDate</th>
+            <th scope="col">PhoneNumber</th>
+            <th scope="col">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in viewData)
+        {
+            <tr class="align-middle">
+                <th scope="row">@(i++)</th>
+                <td>@item.Name</td>
+                <td>@item.BirthDate</td>
+                <td>@item.PhoneNumber</td>
+                <td>
+                    <a onclick="UpdateCompanion('@item.Id')" type="button" class="btn btn-link">
+                        Update
+                    </a>
+                    <a asp-controller="Driver" asp-action="DeleteDriver" asp-route-id="@item.Id" type="button" class="btn btn-link">
+                        Delete
+                    </a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+
+<script>
+
+    function CreateCompanion() {
+      const form = document.getElementById('createDriver');
+      const formObject = new bootstrap.Offcanvas(form);
+      formObject.toggle();
+    }
+	
+    function UpdateCompanion(id) {
+      const form = document.getElementById('updateDriver');
+      const formObject = new bootstrap.Offcanvas(form);
+	  
+	  fetch('/Driver/GetTripById?Id=' + id)
+        .then((response) => response.json())
+        .then((response) => {
+			
+            const id = document.getElementById('TripId');
+            const addressFrom = document.getElementById('Name');
+            const addressTo = document.getElementById('BirthDate');
+            const dateTime = document.getElementById('PhoneNumber');
+			
+			id.value = response.id;
+			addressFrom.value = response.addressFrom;
+			addressTo.value = response.addressTo;
+			dateTime.value = response.dateTime;
+			
+			formObject.toggle();
+        });
+    }
+	
+</script>
