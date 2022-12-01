@@ -1,6 +1,7 @@
 ﻿using Companion.App.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using RideCompanion.ViewModels;
 
 namespace RideCompanion.Controllers;
 
@@ -15,16 +16,17 @@ public class CompanionController : Controller
     {
         _mediator = mediator;
     }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="query"></param>
-    /// <returns></returns>
-    public async Task<IActionResult> Index(GetCompanionsQuery query)
+    
+    public async Task<IActionResult> Index()
     {
-        var data = await _mediator.Send(query);
-        return View(data);
+        var data = await _mediator.Send(new GetCompanionsQuery());
+        
+        if (data.Any())
+        {
+            ViewData["data"] = data.ToList();
+        }
+        
+        return View(new CompanionViewModel());
     }
     
     public IActionResult Create()

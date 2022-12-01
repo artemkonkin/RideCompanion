@@ -13,7 +13,7 @@ public class DeleteCompanionCommand : IRequest<Guid>
     // ----------------------------
     // Props
     // ----------------------------
-    public Guid DriverId { get; set; }
+    public Guid Id { get; set; }
     
     /// <summary>
     /// Handler
@@ -33,16 +33,16 @@ public class DeleteCompanionCommand : IRequest<Guid>
         
         public async Task<Guid> Handle(DeleteCompanionCommand command, CancellationToken cancellationToken)
         {
-            var entity = _context.Trips.FirstOrDefault(e => e.Id == command.DriverId);
+            var entity = _context.Companions.FirstOrDefault(e => e.Id == command.Id);
             
             if (entity != null)
             {
-                _context.Trips.Remove(entity);
+                _context.Companions.Remove(entity);
                 await _context.SaveChanges();
                 return entity.Id;
             }
 
-            return command.DriverId;
+            return command.Id;
         }
     }
 }

@@ -42,7 +42,7 @@
                     <a onclick="UpdateCompanion('@item.Id')" type="button" class="btn btn-link">
                         Update
                     </a>
-                    <a asp-controller="Driver" asp-action="DeleteDriver" asp-route-id="@item.Id" type="button" class="btn btn-link">
+                    <a asp-controller="Companion" asp-action="DeleteCompanion" asp-route-id="@item.Id" type="button" class="btn btn-link">
                         Delete
                     </a>
                 </td>
@@ -55,16 +55,16 @@
 <script>
 
     function CreateCompanion() {
-      const form = document.getElementById('createDriver');
+      const form = document.getElementById('createCompanion');
       const formObject = new bootstrap.Offcanvas(form);
       formObject.toggle();
     }
 	
     function UpdateCompanion(id) {
-      const form = document.getElementById('updateDriver');
+      const form = document.getElementById('updateCompanion');
       const formObject = new bootstrap.Offcanvas(form);
 	  
-	  fetch('/Driver/GetTripById?Id=' + id)
+	  fetch('/Companion/GetCompanionById?Id=' + id)
         .then((response) => response.json())
         .then((response) => {
 			

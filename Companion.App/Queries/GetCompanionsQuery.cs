@@ -1,21 +1,21 @@
-﻿using MediatR;
+﻿using Companion.Domain.Entities;
+using MediatR;
 using Shared.Migrations;
-using Trip.Domain.Entities;
 
 namespace Companion.App.Queries;
 
-public class GetCompanionsQuery : IRequest<IQueryable<TripEntity>>
+public class GetCompanionsQuery : IRequest<IQueryable<CompanionEntity>>
 {
-    public class GetCompanionsQueryHandler : IRequestHandler<GetCompanionsQuery,IQueryable<TripEntity>>
+    public class GetCompanionsQueryHandler : IRequestHandler<GetCompanionsQuery,IQueryable<CompanionEntity>>
     {
         private readonly IApplicationDbContext _context;
         public GetCompanionsQueryHandler(IApplicationDbContext context)
         {
             _context = context;
         }
-        public async Task<IQueryable<TripEntity>> Handle(GetCompanionsQuery query, CancellationToken cancellationToken)
+        public async Task<IQueryable<CompanionEntity>> Handle(GetCompanionsQuery query, CancellationToken cancellationToken)
         {
-            var entities = _context.Trips.Where(d => true);
+            var entities = _context.Companions.Where(d => true);
             return entities;
         }
     }

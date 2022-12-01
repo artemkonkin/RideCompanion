@@ -54,17 +54,17 @@
 
 <script>
 
-    function CreateDriver() {
-      const form = document.getElementById('createDriver');
+    function CreateTrip() {
+      const form = document.getElementById('createTrip');
       const formObject = new bootstrap.Offcanvas(form);
       formObject.toggle();
     }
 	
-    function UpdateDriver(id) {
-      const form = document.getElementById('updateDriver');
+    function UpdateTrip(id) {
+      const form = document.getElementById('updateTrip');
       const formObject = new bootstrap.Offcanvas(form);
 	  
-	  fetch('/Driver/GetTripById?Id=' + id)
+	  fetch('/Trip/GetTripById?Id=' + id)
         .then((response) => response.json())
         .then((response) => {
 			

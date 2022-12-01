@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="11/29/2022 11:09:14" ReportInfo.Modified="11/29/2022 11:26:07" ReportInfo.CreatorVersion="2023.1.0.0">
+  <Dictionary/>
+  <ReportPage Name="Page1" Watermark.Font="Arial, 60pt">
+    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="37.8">
+      <TextObject Name="Text2" Width="718.2" Height="37.8" Fill.Color="Gainsboro" Text="Report title" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+    </ReportTitleBand>
+    <PageHeaderBand Name="PageHeader1" Top="41.8" Width="718.2" Height="18.9" Fill.Color="WhiteSmoke">
+      <TextObject Name="Text1" Left="9.45" Width="94.5" Height="18.9" Text="Page header" Font="Arial, 10pt, style=Bold"/>
+    </PageHeaderBand>
+    <DataBand Name="Data1" Top="64.7" Width="718.2" Height="37.8" Fill.Color="WhiteSmoke">
+      <TextObject Name="Text3" Left="9.45" Top="9.45" Width="94.5" Height="18.9" Text="Data in report" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+    </DataBand>
+    <PageFooterBand Name="PageFooter1" Top="106.5" Width="718.2" Height="56.7" Fill.Color="Gainsboro">
+      <TextObject Name="Text4" Left="9.45" Top="18.9" Width="699.3" Height="18.9" Text="Page footer" VertAlign="Center" Font="Arial, 10pt, style=Italic"/>
+    </PageFooterBand>
+  </ReportPage>
+</Report>

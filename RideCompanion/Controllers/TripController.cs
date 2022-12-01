@@ -17,17 +17,21 @@ public class TripController : Controller
     {
         _mediator = mediator;
     }
-
+    
     /// <summary>
-    /// 
+    /// Index
     /// </summary>
-    /// <param name="query"></param>
-    /// <returns></returns>
-    public async Task<IActionResult> Index(GetTripsQuery query)
+    /// <returns> View </returns>
+    public async Task<IActionResult> Index()
     {
-        await _mediator.Send(query);
-        ViewBag.drivers = 0;
-        return View();
+        var data = await _mediator.Send(new GetTripsQuery());
+        
+        if (data.Any())
+        {
+            ViewData["data"] = data.ToList();
+        }
+        
+        return View(new TripViewModel());
     }
 
     /// <summary>

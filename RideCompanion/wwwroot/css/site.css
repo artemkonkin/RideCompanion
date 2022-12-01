@@ -20,3 +20,8 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.web-report {
+  padding-left: 20px;
+  padding-right: 24px;
+}

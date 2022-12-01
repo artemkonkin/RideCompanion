@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Reports>
+  <Folder Name="General" Description="Reports containing simple objects and demonstrating primitive work with data connection and display.">
+    <Report File="test.frx"/>
+  </Folder>
+</Reports>
