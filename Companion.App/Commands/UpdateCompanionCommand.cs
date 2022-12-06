@@ -12,6 +12,11 @@ namespace Companion.App.Commands;
 /// </summary>
 public class UpdateCompanionCommand : IRequest<Guid>
 {
+    public UpdateCompanionCommand(CompanionDto dto)
+    {
+        Dto = dto;
+    }
+
     // ----------------------------
     // Props
     // ----------------------------
@@ -39,26 +44,15 @@ public class UpdateCompanionCommand : IRequest<Guid>
             if (entity == null) 
                 return command.Dto.Id;
             
-            var newEntity = new CompanionEntity
-            {
-                Id = entity.Id,
+            entity.Name = command.Dto.Name;
+            entity.BirthDate = command.Dto.BirthDate;
+            entity.PhoneNumber = command.Dto.PhoneNumber;
+            entity.UpdateById = Guid.Parse(userId!);
+            entity.UpdateDate = DateTime.Now;
 
-                Name = command.Dto.Name,
-                BirthDate = command.Dto.BirthDate,
-                PhoneNumber = command.Dto.PhoneNumber,
-
-                CreatedById = entity.CreatedById,
-                CreateDate = entity.CreateDate,
-                UpdateById = Guid.Parse(userId!),
-                UpdateDate = DateTime.Now,
-                IsDeleted = command.Dto.IsDeleted
-            };
-                
-            _context.Companions.Update(newEntity);
-            
+            _context.Companions.Update(entity);
             await _context.SaveChanges();
-            
-            return entity.Id;
+            return command.Dto.Id;
         }
     }
 }

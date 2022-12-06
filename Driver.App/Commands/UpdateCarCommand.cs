@@ -42,22 +42,14 @@ public class UpdateCarCommand : IRequest<Guid>
             
             if (entity != null)
             {
-                var newEntity = new CarEntity
-                {
-                    Id = entity.Id,
-                    UserId = entity.UserId,
-                    DriverId = entity.DriverId,
-                    Number = command.CarDto.Number,
-                    Color = command.CarDto.Color,
-                    Model = command.CarDto.Model,
-                    CreatedById = entity.CreatedById,
-                    CreateDate = entity.CreateDate,
-                    UpdateById = Guid.Parse(userId!),
-                    UpdateDate = DateTime.Now,
-                    IsDeleted = command.CarDto.IsDeleted
-                };
-                
-                _context.Cars.Update(newEntity);
+                entity.Number = command.CarDto.Number;
+                entity.Color = command.CarDto.Color;
+                entity.Model = command.CarDto.Model;
+                entity.UpdateById = Guid.Parse(userId!);
+                entity.UpdateDate = DateTime.Now;
+                entity.IsDeleted = command.CarDto.IsDeleted;
+
+                _context.Cars.Update(entity);
                 await _context.SaveChanges();
                 return entity.Id;
             }

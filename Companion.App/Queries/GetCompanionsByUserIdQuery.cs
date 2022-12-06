@@ -6,6 +6,11 @@ namespace Companion.App.Queries;
 
 public class GetCompanionsByUserIdQuery : IRequest<IQueryable<CompanionEntity>>
 {
+    public GetCompanionsByUserIdQuery(Guid id)
+    {
+        Id = id;
+    }
+
     public Guid Id { get; set; }
     
     public class GetCompanionsByUserIdQueryHandler : IRequestHandler<GetCompanionsByUserIdQuery,IQueryable<CompanionEntity>>

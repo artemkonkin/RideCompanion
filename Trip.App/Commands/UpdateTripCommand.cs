@@ -40,33 +40,24 @@ public class UpdateTripCommand : IRequest<Guid>
         {
             var entity = _context.Trips.FirstOrDefault(e => e.Id == command.TripDto.Id);
             var userId = _httpContextAccessor.HttpContext?.User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (entity == null) 
+                return command.TripDto.Id;
             
-            if (entity != null)
-            {
-                var newEntity = new TripEntity
-                {
-                    Id = entity.Id,
+            entity.Driver = command.TripDto.Driver;
+            entity.Companion = command.TripDto.Companion;
+            entity.Car = command.TripDto.Car;
+            entity.AddressFrom = command.TripDto.AddressFrom;
+            entity.AddressTo = command.TripDto.AddressTo;
+            entity.DateTime = command.TripDto.DateTime;
+            entity.UpdateById = Guid.Parse(userId!);
+            entity.UpdateDate = DateTime.Now;
+            entity.IsDeleted = command.TripDto.IsDeleted;
 
-                    Driver = command.TripDto.Driver,
-                    Companion = command.TripDto.Companion,
-                    Car = command.TripDto.Car,
-                    AddressFrom = command.TripDto.AddressFrom,
-                    AddressTo = command.TripDto.AddressTo,
-                    DateTime = command.TripDto.DateTime,
+            _context.Trips.Update(entity);
+            await _context.SaveChanges();
+            return entity.Id;
 
-                    CreatedById = entity.CreatedById,
-                    CreateDate = entity.CreateDate,
-                    UpdateById = Guid.Parse(userId!),
-                    UpdateDate = DateTime.Now,
-                    IsDeleted = command.TripDto.IsDeleted
-                };
-                
-                _context.Trips.Update(newEntity);
-                await _context.SaveChanges();
-                return entity.Id;
-            }
-
-            return command.TripDto.Id;
         }
     }
 }

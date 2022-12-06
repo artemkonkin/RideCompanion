@@ -13,26 +13,19 @@
         <div>
             <form method="post" asp-controller="Companion" asp-action="CreateCompanion">
                 <div class="mb-3">
-                    <select asp-items="@ViewBag.cities" class="form-select" aria-label="Default select example">
-                      <option selected>Open this select menu</option>
-                      <option value="null">Null</option>
-                    </select>
-                    <div class="form-text">AddressFrom</div>
+                    <label class="form-label">Full name</label>
+                    <input asp-for="@Model.CompanionDto.Name" type="text" class="form-control" id="">
+                    <div class="form-text">Full name</div>
                 </div>
                 <div class="mb-3">
-                    <label class="form-label">AddressFrom</label>
-                    <input asp-for="@Model.CompanionDto.Name" type="text" class="form-control" id="TripAddressFrom">
-                    <div class="form-text">AddressFrom</div>
+                    <label class="form-label">Birth date</label>
+                    <input asp-for="@Model.CompanionDto.BirthDate" type="date" class="form-control" id="" value="1900-01-01" min="1900-01-01" max="2100-12-31">
+                    <div class="form-text">Birth date</div>
                 </div>
                 <div class="mb-3">
-                    <label class="form-label">AddressTo</label>
-                    <input asp-for="@Model.CompanionDto.BirthDate" type="date" class="form-control" id="TripAddressTo">
-                    <div class="form-text">AddressTo</div>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">DateTime</label>
-                    <input asp-for="@Model.CompanionDto.PhoneNumber" type="date" class="form-control" id="TripDateTime" value="1900-01-01" min="1900-01-01" max="2100-12-31">
-                    <div class="form-text">DateTime</div>
+                    <label class="form-label">Phone number</label>
+                    <input asp-for="@Model.CompanionDto.PhoneNumber" type="text" class="form-control" id="">
+                    <div class="form-text">Phone number</div>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>

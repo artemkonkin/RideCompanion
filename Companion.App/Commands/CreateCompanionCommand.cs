@@ -13,6 +13,11 @@ namespace Companion.App.Commands;
 /// </summary>
 public class CreateCompanionCommand : IRequest<Guid>
 {
+    public CreateCompanionCommand(CompanionDto dto)
+    {
+        Dto = dto;
+    }
+
     // ----------------------------
     // Props
     // ----------------------------

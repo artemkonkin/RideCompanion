@@ -10,6 +10,11 @@ namespace Companion.App.Commands;
 /// </summary>
 public class DeleteCompanionCommand : IRequest<Guid>
 {
+    public DeleteCompanionCommand(Guid id)
+    {
+        Id = id;
+    }
+
     // ----------------------------
     // Props
     // ----------------------------

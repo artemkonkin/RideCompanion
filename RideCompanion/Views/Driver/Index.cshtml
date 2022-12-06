@@ -73,13 +73,12 @@
             const id = document.getElementById('DriverId');
             const fullName = document.getElementById('DriverFullName');
             const birthDate = document.getElementById('DriverBirthDate');
+            
+            console.log(response);
 			
 			id.value = response.id;
-			
 			fullName.value = response.fullName;
-			
-			var date = new Date(response.birthDate);
-			birthDate.value = date.toISOString().substring(0, 10);
+			birthDate.value = response.birthDate;
 			
 			formObject.toggle();
         });

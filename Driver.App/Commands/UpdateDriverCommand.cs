@@ -39,23 +39,18 @@ public class UpdateDriverCommand : IRequest<Guid>
             var entity = _context.Drivers.FirstOrDefault(d => d.Id == command.DriverDto.Id);
             var userId = _httpContextAccessor.HttpContext?.User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            if (entity != null)
-            {
-                entity.Id = entity.Id;
-                entity.FullName = command.DriverDto.FullName;
-                entity.BirthDate = command.DriverDto.BirthDate;
-                entity.CreatedById = entity.CreatedById;
-                entity.CreateDate = entity.CreateDate;
-                entity.UpdateById = Guid.Parse(userId!);
-                entity.UpdateDate = DateTime.Now;
-                entity.IsDeleted = entity.IsDeleted;
+            if (entity == null) 
+                return command.DriverId;
+            
+            entity.FullName = command.DriverDto.FullName;
+            entity.BirthDate = command.DriverDto.BirthDate;
+            entity.UpdateById = Guid.Parse(userId!);
+            entity.UpdateDate = DateTime.Now;
 
-                _context.Drivers.Update(entity);
-                await _context.SaveChanges();
-                return entity.Id;
-            }
+            _context.Drivers.Update(entity);
+            await _context.SaveChanges();
+            return entity.Id;
 
-            return command.DriverId;
         }
     }
 }

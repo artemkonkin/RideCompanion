@@ -68,15 +68,15 @@
         .then((response) => response.json())
         .then((response) => {
 			
-            const id = document.getElementById('TripId');
-            const addressFrom = document.getElementById('Name');
-            const addressTo = document.getElementById('BirthDate');
-            const dateTime = document.getElementById('PhoneNumber');
+            const id = document.getElementById('CompanionId');
+            const addressFrom = document.getElementById('CompanionName');
+            const addressTo = document.getElementById('CompanionBirthDate');
+            const dateTime = document.getElementById('CompanionPhoneNumber');
 			
 			id.value = response.id;
-			addressFrom.value = response.addressFrom;
-			addressTo.value = response.addressTo;
-			dateTime.value = response.dateTime;
+			addressFrom.value = response.name;
+			addressTo.value = response.birthDate;
+			dateTime.value = response.phoneNumber;
 			
 			formObject.toggle();
         });
